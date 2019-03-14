@@ -1,0 +1,10 @@
+{
+    "private": true,
+    "scripts": {
+        "format:php": "prettier --config=.prettierrc --write --parser=php"
+    },
+    "devDependencies": {
+        "@prettier/plugin-php": "^0.9.0",
+        "prettier": "^1.16.4"
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "name": "pre/prop-types",
+    "description": "Prop type validators for Phpx components",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Christopher Pitt",
+            "email": "cgpitt@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Pre\\": "source"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test:coverage": "vendor/bin/phpunit --coverage-html coverage"
+    }
+}
