@@ -2,6 +2,7 @@
 
 namespace Pre\PropTypes\Concerns;
 
+use Exception;
 use InvalidArgumentException;
 use Pre\PropTypes\Definition;
 
@@ -10,19 +11,23 @@ trait ValidationConcern
     public static function validate(array $definitions, array $properties)
     {
         foreach ($definitions as $key => $definition) {
-            if ($definition->either) {
-                static::validateMultipleTypes($definition, $properties);
+            $definition->name = $key;
+            static::validatePresence($definition, $key, $properties);
 
+            if (isset($properties[$key]) && $definition->either) {
                 foreach ($definition->either as $next) {
-                    if (isset($properties[$key])) {
+                    try {
                         static::validateValue($next, $key, $properties[$key]);
+                        // one of them passed...§
+                        continue 2;
+                    } catch (Exception $e) {
+                        // try the next type...
+                        continue;
                     }
-                }
-                
-                continue;
-            }
 
-            static::validateSingleType($definition, $key, $properties);
+                    throw new InvalidArgumentException("{$key} was neither of the types defined");
+                }
+            }
 
             if (isset($properties[$key])) {
                 static::validateValue($definition, $key, $properties[$key]);
@@ -30,24 +35,7 @@ trait ValidationConcern
         }
     }
 
-    private static function validateMultipleTypes(Definition $definition, array $properties)
-    {
-        if ($definition->isRequired) {
-            $found = false;
-
-            foreach ($definition->either as $key => $value) {
-                if (isset($properties[$key])) {
-                    $found = true;
-                }
-            }
-
-            if (!$found) {
-                throw new InvalidArgumentException("{$key} is required but missing");
-            }
-        }
-    }
-
-    private static function validateSingleType(Definition $definition, string $key, array $properties)
+    private static function validatePresence(Definition $definition, string $key, array $properties)
     {
         if (!isset($properties[$key]) && !$definition->isRequired) {
             return;
@@ -64,8 +52,6 @@ trait ValidationConcern
 
         $suffix = ucfirst($expected);
         $function = "isValid{$suffix}";
-
-        $definition->name = $key;
 
         if (!static::{$function}($value, $definition)) {
             $actual = gettype($value);

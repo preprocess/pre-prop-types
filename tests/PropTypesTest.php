@@ -79,23 +79,33 @@ final class PropTypesTest extends TestCase
     {
         $definitions = [
             "array" => PropTypes::array()->isRequired(),
-            "arrayOf" => PropTypes::arrayOf(PropTypes::string())->isRequired(),
             "bool" => PropTypes::bool()->isRequired(),
             "boolean" => PropTypes::boolean()->isRequired(),
+            "closure" => PropTypes::closure()->isRequired(),
+            "double" => PropTypes::double()->isRequired(),
+            "float" => PropTypes::float()->isRequired(),
             "int" => PropTypes::int()->isRequired(),
             "integer" => PropTypes::integer()->isRequired(),
-            "objectOfType" => PropTypes::objectOfType(stdClass::class)->isRequired(),
+            "iterable" => PropTypes::iterable()->isRequired(),
+            "numeric" => PropTypes::numeric()->isRequired(),
+            "object" => PropTypes::object()->isRequired(),
+            "resource" => PropTypes::resource()->isRequired(),
             "string" => PropTypes::string()->isRequired(),
         ];
 
         $properties = [
             "array" => [1, 2, 3],
-            "arrayOf" => ["1", "2", "3"],
             "bool" => false,
             "boolean" => true,
+            "closure" => function() {},
+            "double" => 1.1,
+            "float" => 1.1,
             "int" => 2,
             "integer" => 3,
-            "objectOfType" => new stdClass(),
+            "iterable" => [1, 2, 3],
+            "numeric" => 123,
+            "object" => json_decode(json_encode(["foo" => "bar"])),
+            "resource" => fopen("php://memory", "r"),
             "string" => "cats",
         ];
 

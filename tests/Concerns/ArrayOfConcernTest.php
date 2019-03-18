@@ -70,8 +70,8 @@ final class ArrayOfConcernTest extends TestCase
     public function test_it_can_handle_arrays_of_objects()
     {
         $definitions = [
-            "stdClass" => PropTypes::arrayOf(PropTypes::objectOfType(stdClass::class)),
-            "Definition" => PropTypes::arrayOf(PropTypes::objectOfType(Definition::class)),
+            "stdClass" => PropTypes::arrayOf(PropTypes::objectOf(stdClass::class)),
+            "Definition" => PropTypes::arrayOf(PropTypes::objectOf(Definition::class)),
         ];
 
         $properties = [

@@ -6,7 +6,7 @@ use Pre\PropTypes\Definition;
 
 trait EitherConcern
 {
-    private static function either(...$types): array
+    public static function either(...$types): Definition
     {
         $definition = new Definition();
         $definition->either = $types;

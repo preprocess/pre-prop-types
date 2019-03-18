@@ -7,11 +7,11 @@ use Pre\PropTypes\Definition;
 
 trait TypesConcern
 {
-    private static $types = ["array", "bool", "boolean", "int", "integer", "string"];
+    private static $types = ["array", "bool", "boolean", "closure", "double", "float", "int", "integer", "iterable", "numeric", "object", "resource", "string"];
 
     public static function __callStatic(string $method, $parameters = null)
     {
-        if ($method === "arrayOf" || $method === "objectOfType") {
+        if ($method === "arrayOf" || $method === "objectOf") {
             $definition = new Definition();
             $definition->type = $method;
 
