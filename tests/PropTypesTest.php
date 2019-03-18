@@ -32,7 +32,7 @@ final class PropTypesTest extends TestCase
 
     public function test_it_can_require_values()
     {
-        $this->expectException(InvalidArgumentException::class, "name is required but missing");
+        $this->expectException(InvalidArgumentException::class, "'name' is required but missing");
 
         $definitions = [
             "name" => PropTypes::string()->isRequired(),
@@ -62,7 +62,7 @@ final class PropTypesTest extends TestCase
 
     public function test_it_can_validate_incorrect_values()
     {
-        $this->expectException(InvalidArgumentException::class, "name expects string but integer provided");
+        $this->expectException(InvalidArgumentException::class, "'name' expected string but got integer");
 
         $definitions = [
             "name" => PropTypes::string()->isRequired(),
@@ -116,7 +116,7 @@ final class PropTypesTest extends TestCase
 
     public function test_it_can_recognise_unrecognised_types()
     {
-        $this->expectException(InvalidArgumentException::class, "unknown is not a valid type");
+        $this->expectException(InvalidArgumentException::class, "'unknown' is not a valid type");
 
         PropTypes::unknown();
     }

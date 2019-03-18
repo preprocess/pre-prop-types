@@ -13,7 +13,7 @@ trait ObjectOfConcern
 
         if (!$isObject || !is_a($value, $type)) {
             $actual = $isObject ? get_class($value) : gettype($value);
-            throw new InvalidArgumentException("{$actual} is not objectOf({$type})");
+            throw new InvalidArgumentException("'{$definition->name}' expected {$type} but got {$actual}");
         }
 
         return true;

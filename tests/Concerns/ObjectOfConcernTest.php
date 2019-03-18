@@ -8,7 +8,7 @@ final class ObjectOfConcernTest extends TestCase
 {
     public function test_it_can_tell_non_objects()
     {
-        $this->expectException(InvalidArgumentException::class, "integer is not objectOf(stdClass)");
+        $this->expectException(InvalidArgumentException::class, "'objectOf' expected stdClass but got integer");
 
         $definitions = [
             "objectOf" => PropTypes::objectOf(stdClass::class)->isRequired(),
@@ -23,7 +23,7 @@ final class ObjectOfConcernTest extends TestCase
 
     public function test_it_can_tell_objects_with_wrong_type()
     {
-        $this->expectException(InvalidArgumentException::class, "Definition is not objectOf(stdClass)");
+        $this->expectException(InvalidArgumentException::class, "'objectOf' expected stdClass but got Definition");
 
         $definitions = [
             "objectOf" => PropTypes::objectOf(stdClass::class)->isRequired(),

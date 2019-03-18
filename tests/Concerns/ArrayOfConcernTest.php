@@ -8,7 +8,7 @@ final class ArrayOfConcernTest extends TestCase
 {
     public function test_it_can_tell_when_isnt_array()
     {
-        $this->expectException(InvalidArgumentException::class, "arrayOf expects string[] but integer provided");
+        $this->expectException(InvalidArgumentException::class, "'arrayOf' expected string but got integer");
 
         $definitions = [
             "arrayOf" => PropTypes::arrayOf(PropTypes::string())->isRequired(),
@@ -23,7 +23,7 @@ final class ArrayOfConcernTest extends TestCase
 
     public function test_it_can_tell_when_has_a_bad_type_definition()
     {
-        $this->expectException(InvalidArgumentException::class, "arrayOf expects string[] but integer provided");
+        $this->expectException(InvalidArgumentException::class, "'foo' is not a valid type");
 
         $definitions = [
             "arrayOf" => PropTypes::arrayOf("foo")->isRequired(),
@@ -38,7 +38,7 @@ final class ArrayOfConcernTest extends TestCase
 
     public function test_it_can_tell_items_types()
     {
-        $this->expectException(InvalidArgumentException::class, "arrayOf has an unexpected integer in arrayOf(string)");
+        $this->expectException(InvalidArgumentException::class, "'arrayOf' expected string but got integer");
 
         $definitions = [
             "arrayOf" => PropTypes::arrayOf(PropTypes::int())->isRequired(),

@@ -31,6 +31,6 @@ trait TypesConcern
             return $definition;
         }
 
-        throw new InvalidArgumentException("{$method} is not a valid type");
+        throw new InvalidArgumentException("'{$method}' is not a valid type");
     }
 }

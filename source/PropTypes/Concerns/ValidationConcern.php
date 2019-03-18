@@ -11,6 +11,10 @@ trait ValidationConcern
     public static function validate(array $definitions, array $properties)
     {
         foreach ($definitions as $key => $definition) {
+            if (!is_object($definition)) {
+                throw new InvalidArgumentException("'{$key}' is not a valid type");
+            }
+
             $definition->name = $key;
             static::validatePresence($definition, $key, $properties);
 
@@ -18,14 +22,14 @@ trait ValidationConcern
                 foreach ($definition->either as $next) {
                     try {
                         static::validateValue($next, $key, $properties[$key]);
-                        // one of them passed...§
+                        // one of them passed...
                         continue 2;
                     } catch (Exception $e) {
                         // try the next type...
                         continue;
                     }
 
-                    throw new InvalidArgumentException("{$key} was neither of the types defined");
+                    throw new InvalidArgumentException("'{$key}' was neither of the types defined");
                 }
             }
 
@@ -42,7 +46,7 @@ trait ValidationConcern
         }
 
         if (!isset($properties[$key]) && $definition->isRequired) {
-            throw new InvalidArgumentException("{$key} is required but missing");
+            throw new InvalidArgumentException("'{$key}' was required but not provided");
         }
     }
 
@@ -55,7 +59,7 @@ trait ValidationConcern
 
         if (!static::{$function}($value, $definition)) {
             $actual = gettype($value);
-            throw new InvalidArgumentException("{$key} expects {$expected} but {$actual} provided");
+            throw new InvalidArgumentException("'{$key}' expected {$expected} but got {$actual}");
         }
     }
 }

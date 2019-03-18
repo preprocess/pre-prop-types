@@ -43,7 +43,7 @@ final class EitherConcernTest extends TestCase
 
     public function test_obeys_is_required()
     {
-        $this->expectException(InvalidArgumentException::class, "value is required but missing");
+        $this->expectException(InvalidArgumentException::class, "'value' is required but missing");
 
         $definitions = [
             "value" => PropTypes::either(PropTypes::string(), PropTypes::int())
@@ -59,7 +59,7 @@ final class EitherConcernTest extends TestCase
 
     public function test_it_rejects_either_type()
     {
-        $this->expectException(InvalidArgumentException::class, "value was neither of the types defined");
+        $this->expectException(InvalidArgumentException::class, "'value' was neither of the types defined");
 
         $definitions = [
             "value" => PropTypes::either(PropTypes::string(), PropTypes::int())
