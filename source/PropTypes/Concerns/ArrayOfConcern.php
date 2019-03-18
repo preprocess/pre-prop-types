@@ -3,7 +3,7 @@
 namespace Pre\PropTypes\Concerns;
 
 use InvalidArgumentException;
-use Pre\PropTypes\Fluent;
+use Pre\PropTypes\Definition;
 
 trait ArrayOfConcern
 {
@@ -14,23 +14,16 @@ trait ArrayOfConcern
             throw new InvalidArgumentException("{$definition->name} expects {$definition->type}[] but {$actual} provided");
         }
 
-        $definition = $definition->definition;
-
-        if (!is_object($definition) || !is_a($definition, Fluent::class)) {
+        if (!is_object($definition->definition) || !is_a($definition->definition, Definition::class)) {
             throw new InvalidArgumentException("arrayOf missing type definition");
         }
 
         foreach ($value as $next) {
-            $type = strtolower($definition->type);
-
-            $suffix = ucfirst($type);
-            $function = "isValid{$suffix}";
-
-            if (!static::{$function}($next)) {
-                $actual = gettype($next);
-
-                throw new InvalidArgumentException("{$definition->name} has an unexpected {$actual} in arrayOf({$type})");
-            }
+            static::validate([
+                $definition->name => $definition->definition,
+            ], [
+                $definition->name => $next,
+            ]);
         }
 
         return true;

@@ -2,7 +2,7 @@
 
 namespace Pre\PropTypes;
 
-class Fluent
+class Definition
 {
     public $attributes = [];
 
