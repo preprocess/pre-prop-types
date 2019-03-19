@@ -1,5 +1,7 @@
 # Prop Types
 
+[![Support on Gitstore](https://enjoy.gitstore.app/repositories/badge-preprocess/pre-prop-types.svg)](https://enjoy.gitstore.app/repositories/preprocess/pre-prop-types)
+
 This is a PHP take on the ReactJS Prop Types checking. I made it because I wanted an easier way to validate the type and presence of properties in Phpx components.
 
 ## Getting started
@@ -51,18 +53,18 @@ try {
 }
 ```
 
-- `isRequired` will ensure the value is present in the accompanying properties array
-- `either` allows one or more types (preferably two distinct types) for comparison
+-   `isRequired` will ensure the value is present in the accompanying properties array
+-   `either` allows one or more types (preferably two distinct types) for comparison
 
 There are also variations on these:
 
-- `PropTypes::array()` expects any array values, without a specific type
-- `PropTypes::boolean()` is the same as `PropTypes::bool()`
-- `PropTypes::integer()` is the same as `PropTypes::int()`
-- `PropTypes::double()` expects double values
-- `PropTypes::iterable()` expects any iterable values
-- `PropTypes::numeric()` expects any numeric values
-- `PropTypes::object()` expects any object values, without a specific type
+-   `PropTypes::array()` expects any array values, without a specific type
+-   `PropTypes::boolean()` is the same as `PropTypes::bool()`
+-   `PropTypes::integer()` is the same as `PropTypes::int()`
+-   `PropTypes::double()` expects double values
+-   `PropTypes::iterable()` expects any iterable values
+-   `PropTypes::numeric()` expects any numeric values
+-   `PropTypes::object()` expects any object values, without a specific type
 
 ## Validating types
 
@@ -72,7 +74,8 @@ We don't automatically validate props – this must be done by the consumer. And
 use Pre\PropTypes;
 use function Pre\Phpx\Html\render as renderHTML;
 
-function render($type, $props = []) {
+function render($type, $props = [])
+{
     $props = (array) $props;
 
     if (class_exists($type)) {
