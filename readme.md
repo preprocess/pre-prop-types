@@ -33,14 +33,14 @@ $definitions = [
         PropTypes::resource(), // file handle
     ),
     "profile" => PropTypes::objectOf(Profile::class)->isRequired(),
-    "notifier" => PropTypes::closure()->isRequired(),
+    "onMessage" => PropTypes::closure()->isRequired(),
     "isAdmin" => PropTypes::bool()->isRequired(),
 ];
 
 $properties = [
     "name" => "Joe",
     "profile" => $profile,
-    "notifier" => function($message) use ($profile) {
+    "onMessage" => function($message) use ($profile) {
         $profile->notify($message);
     },
     "isAdmin" => false,
